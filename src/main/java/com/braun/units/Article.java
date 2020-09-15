@@ -20,6 +20,14 @@ public class Article {
         this.reserved = reserved;
     }
 
+    public Article(String name, String description, Calendar creatioDate, int storagePlace, boolean reserved) {
+        this.name = name;
+        this.description = description;
+        this.creatioDate = creatioDate;
+        this.storagePlace = storagePlace;
+        this.reserved = reserved;
+    }
+
     public int getId() {
         return id;
     }
