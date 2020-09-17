@@ -1,27 +1,29 @@
 import com.braun.dao.ArticleDAO;
-
 import com.braun.dao.ArticleDaoImpl;
 import com.braun.units.Article;
+import org.junit.Ignore;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import java.sql.DriverManager;
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ArticleDaoTest {
 
-    private static final String DRIVER_NAME = "org.hsqldb.jdbcDriver";
-    private static final String DATABASE_URL = "jdbc:hsqldb:file:article;shutdown=true";
-    private static final String PASSWORD = "";
-    private static final String USERNAME = "sa";
+    private static final String DRIVER_NAME = "com.mysql.jdbc.Driver";
+    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/warehouse?useUnicode=true&serverTimezone=UTC&useSSL=false";
+    private static final String PASSWORD = "Na4uhudonossor";
+    private static final String USERNAME = "root";
 
     private DriverManagerDataSource dataSource;
     private ArticleDAO dao;
 
-    @Test
-    void testSave(){
+    @BeforeEach
+    void setupBeforeEach() {
         dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(DRIVER_NAME);
         dataSource.setUrl(DATABASE_URL);
@@ -29,30 +31,60 @@ public class ArticleDaoTest {
         dataSource.setPassword(PASSWORD);
 
         dao = new ArticleDaoImpl(dataSource);
+    }
 
-        Article testArticle = new Article("Computer","MacBook",new GregorianCalendar(2020,9,15),10,false);
+    @Test
+    @Ignore
+    void testSave() {
+        Article testArticle = new Article("Computer", "MacBook", new GregorianCalendar(2020, 9, 15), 10, false);
         int result = dao.save(testArticle);
 
-        assertTrue(result >0);
+        assertTrue(result > 0);
     }
 
     @Test
-    void testUpdate(){
-        fail();
+    @Ignore
+    void testUpdate() {
+        Article testArticle = new Article(3, "Computer", "Dell", new GregorianCalendar(2020, 10, 15), 10, false);
+        int result = dao.update(testArticle);
+
+        assertTrue(result > 0);
     }
 
     @Test
-    void testGet(){
-        fail();
+    @Ignore
+    void testGet() {
+        Integer id = 2;
+        Article article = dao.get(id);
+//        if (article != null) {
+//            System.out.println(article);
+//        } else {
+//            System.out.println("Article doesn't exist");
+//        }
+        assertNotNull(article);
     }
 
     @Test
-    void testDelete(){
-        fail();
+    @Ignore
+    void testDelete() {
+        Integer id = 2;
+        int result = dao.delete(id);
+
+        assertTrue(result > 0);
     }
 
     @Test
-    void testAllArticles(){
-        fail();
+    void testAllArticles() {
+        List<Map<String,Object>> articleList = dao.allArticles();
+
+        articleList.stream()
+        .flatMap(x -> x.entrySet().stream())
+        .forEach(entry -> System.out.println("k: "+ entry.getKey() + " v: " + entry.getValue()));
+
+        for (Map nextArticle: articleList) {
+            System.out.println(nextArticle);
+        }
+        assertTrue(!articleList.isEmpty());
+        assertEquals(3, articleList.size());
     }
 }

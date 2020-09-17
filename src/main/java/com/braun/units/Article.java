@@ -28,6 +28,18 @@ public class Article {
         this.reserved = reserved;
     }
 
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", creatioDate=" + creatioDate +
+                ", storagePlace=" + storagePlace +
+                ", reserved=" + reserved +
+                '}';
+    }
+
     public int getId() {
         return id;
     }

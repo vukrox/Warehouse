@@ -3,6 +3,7 @@ package com.braun.dao;
 import com.braun.units.Article;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ArticleDAO {
 
@@ -10,5 +11,5 @@ public interface ArticleDAO {
     public int update(Article oldArticle);
     public Article get(Integer contactId);
     public int delete(Integer id);
-    public List<Article> allArticles();
+    public List<Map <String,Object>> allArticles();
 }
