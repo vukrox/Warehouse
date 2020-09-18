@@ -22,7 +22,7 @@ public class MainController {
 
     @RequestMapping(value = "/")
     public ModelAndView listContact(ModelAndView model) {
-        List<Map<String, Object>> articles = articleDAO.allArticles();
+        List<Article> articles = articleDAO.allArticles();
         model.addObject("articles", articles);
         model.setViewName("index");
         return model;

@@ -34,9 +34,9 @@
             <tr>
                 <td>${status.index + 1}</td>
                 <td>${article.name}</td>
-                <td>${article.decription}</td>
-                <td>${article.date}</td>
-                <td>${article.storage_place}</td>
+                <td>${article.description}</td>
+                <td>${article.creationDate}</td>
+                <td>${article.storagePlace}</td>
                 <td>${article.reserved}</td>
                 <td>
                     <a href="edit?id=${article.id}">Edit</a>

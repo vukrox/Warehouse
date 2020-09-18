@@ -11,5 +11,5 @@ public interface ArticleDAO {
     public int update(Article oldArticle);
     public Article get(Integer contactId);
     public int delete(Integer id);
-    public List<Map <String,Object>> allArticles();
+    public List<Article> allArticles();
 }

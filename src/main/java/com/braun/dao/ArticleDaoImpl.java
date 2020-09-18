@@ -97,53 +97,20 @@ public class ArticleDaoImpl implements ArticleDAO {
         return jdbcTemplate.update(sqlDelete);
     }
 
-//    @Override
-//    public List<Article> allArticles() {
-//        String sqlChooseAll = "SELECT * FROM warehouse.article";
-//
-//        List<Article> articleList = new ArrayList<>();
-//
-//        RowMapper<Article> artMapper = new RowMapper<Article>() {
-//
-//            @Override
-//            public Article mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-//                System.out.println("-----------------------------------------------------");
-//                System.out.println(resultSet.toString());
-//                System.out.println("-----------------------------------------------------");
-//                while (resultSet.next()) {
-//
-//                    Integer articleId = resultSet.getInt("ID");
-//                    String name = resultSet.getString("NAME");
-//                    String description = resultSet.getString("DESCRIPTION");
-//
-//                    Date myDate = resultSet.getDate("CREATION_DATE");
-//                    Calendar cal = new GregorianCalendar();
-//                    cal.setTime(myDate);
-//
-//                    int storagePlace = resultSet.getInt("STORAGE_PLACE");
-//                    boolean reserved = resultSet.getBoolean("RESERVED");
-//
-//                    Article article = new Article(articleId, name, description, cal, storagePlace, reserved);
-//                    articleList.add(article);
-//                }
-//                return null;
-//            }
-//        };
-//        jdbcTemplate.query(sqlChooseAll,artMapper);
-//        return articleList;
-//    }
     @Override
-    public List<Map <String,Object>> allArticles() {
-
-        String sqlChooseAll = "SELECT * FROM warehouse.article";
+    public List<Article> allArticles() {
 
         List<Article> articleList = new ArrayList<>();
+
+        String sqlChooseAll = "SELECT * FROM warehouse.article";
 
         RowMapper<Article> artMapper = new RowMapper<Article>() {
 
             @Override
             public Article mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-
+                System.out.println("-----------------------------------------------------");
+                System.out.println(resultSet.toString());
+                System.out.println("-----------------------------------------------------");
                 while (resultSet.next()) {
 
                     Integer articleId = resultSet.getInt("ID");
@@ -163,8 +130,42 @@ public class ArticleDaoImpl implements ArticleDAO {
                 return null;
             }
         };
-
-        return jdbcTemplate.queryForList(sqlChooseAll);
+        jdbcTemplate.query(sqlChooseAll,artMapper);
+        return articleList;
     }
+//    @Override
+//    public List<Map <String,Object>> allArticles() {
+//
+//        String sqlChooseAll = "SELECT * FROM warehouse.article";
+//
+//        List<Article> articleList = new ArrayList<>();
+//
+//        RowMapper<Article> artMapper = new RowMapper<Article>() {
+//
+//            @Override
+//            public Article mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+//
+//                while (resultSet.next()) {
+//
+//                    Integer articleId = resultSet.getInt("ID");
+//                    String name = resultSet.getString("NAME");
+//                    String description = resultSet.getString("DESCRIPTION");
+//
+//                    Date myDate = resultSet.getDate("CREATION_DATE");
+//                    Calendar cal = new GregorianCalendar();
+//                    cal.setTime(myDate);
+//
+//                    int storagePlace = resultSet.getInt("STORAGE_PLACE");
+//                    boolean reserved = resultSet.getBoolean("RESERVED");
+//
+//                    Article article = new Article(articleId, name, description, cal, storagePlace, reserved);
+//                    articleList.add(article);
+//                }
+//                return null;
+//            }
+//        };
+//
+//        return jdbcTemplate.queryForList(sqlChooseAll);
+//    }
 
 }

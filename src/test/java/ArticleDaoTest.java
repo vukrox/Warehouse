@@ -56,11 +56,11 @@ public class ArticleDaoTest {
     void testGet() {
         Integer id = 2;
         Article article = dao.get(id);
-//        if (article != null) {
-//            System.out.println(article);
-//        } else {
-//            System.out.println("Article doesn't exist");
-//        }
+        if (article != null) {
+            System.out.println(article);
+        } else {
+            System.out.println("Article doesn't exist");
+        }
         assertNotNull(article);
     }
 
@@ -75,16 +75,16 @@ public class ArticleDaoTest {
 
     @Test
     void testAllArticles() {
-        List<Map<String,Object>> articleList = dao.allArticles();
+        List<Article> articleList = dao.allArticles();
 
-        articleList.stream()
-        .flatMap(x -> x.entrySet().stream())
-        .forEach(entry -> System.out.println("k: "+ entry.getKey() + " v: " + entry.getValue()));
+//        articleList.stream()
+//        .flatMap(x -> x.entrySet().stream())
+//        .forEach(entry -> System.out.println("k: "+ entry.getKey() + " v: " + entry.getValue()));
 
-        for (Map nextArticle: articleList) {
+        for (Article nextArticle: articleList) {
             System.out.println(nextArticle);
         }
         assertTrue(!articleList.isEmpty());
-        assertEquals(3, articleList.size());
+        assertEquals(2, articleList.size());
     }
 }
