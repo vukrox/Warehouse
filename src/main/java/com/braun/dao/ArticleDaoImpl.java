@@ -100,18 +100,14 @@ public class ArticleDaoImpl implements ArticleDAO {
     @Override
     public List<Article> allArticles() {
 
-        List<Article> articleList = new ArrayList<>();
-
         String sqlChooseAll = "SELECT * FROM warehouse.article";
 
         RowMapper<Article> artMapper = new RowMapper<Article>() {
 
             @Override
             public Article mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-                System.out.println("-----------------------------------------------------");
-                System.out.println(resultSet.toString());
-                System.out.println("-----------------------------------------------------");
-                while (resultSet.next()) {
+
+                Article article = null;
 
                     Integer articleId = resultSet.getInt("ID");
                     String name = resultSet.getString("NAME");
@@ -124,15 +120,14 @@ public class ArticleDaoImpl implements ArticleDAO {
                     int storagePlace = resultSet.getInt("STORAGE_PLACE");
                     boolean reserved = resultSet.getBoolean("RESERVED");
 
-                    Article article = new Article(articleId, name, description, cal, storagePlace, reserved);
-                    articleList.add(article);
-                }
-                return null;
+                     article = new Article(articleId, name, description, cal, storagePlace, reserved);
+
+                return article;
             }
         };
-        jdbcTemplate.query(sqlChooseAll,artMapper);
-        return articleList;
+        return jdbcTemplate.query(sqlChooseAll,artMapper);
     }
+
 //    @Override
 //    public List<Map <String,Object>> allArticles() {
 //
