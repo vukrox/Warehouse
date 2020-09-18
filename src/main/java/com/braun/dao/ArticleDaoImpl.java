@@ -46,7 +46,7 @@ public class ArticleDaoImpl implements ArticleDAO {
         return jdbcTemplate.update(sqlInsert,
                 newArticle.getName(),
                 newArticle.getDescription(),
-                newArticle.getCreatioDate(),
+                newArticle.getCreationDate(),
                 newArticle.getStoragePlace(),
                 newArticle.isReserved());
     }
@@ -58,7 +58,7 @@ public class ArticleDaoImpl implements ArticleDAO {
         return jdbcTemplate.update(sqlUpdate,
                 oldArticle.getName(),
                 oldArticle.getDescription(),
-                oldArticle.getCreatioDate(),
+                oldArticle.getCreationDate(),
                 oldArticle.getStoragePlace(),
                 oldArticle.isReserved(),
                 oldArticle.getId());

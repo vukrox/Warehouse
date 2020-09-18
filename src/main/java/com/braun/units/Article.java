@@ -7,15 +7,18 @@ public class Article {
     private int id;
     private String name;
     private String description;
-    private Calendar creatioDate;
+    private Calendar creationDate;
     private int storagePlace;
     private boolean reserved;
+
+    public Article() {
+    }
 
     public Article(int id, String name, String description, Calendar creatioDate, int storagePlace, boolean reserved) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.creatioDate = creatioDate;
+        this.creationDate = creatioDate;
         this.storagePlace = storagePlace;
         this.reserved = reserved;
     }
@@ -23,7 +26,7 @@ public class Article {
     public Article(String name, String description, Calendar creatioDate, int storagePlace, boolean reserved) {
         this.name = name;
         this.description = description;
-        this.creatioDate = creatioDate;
+        this.creationDate = creatioDate;
         this.storagePlace = storagePlace;
         this.reserved = reserved;
     }
@@ -34,7 +37,7 @@ public class Article {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", creatioDate=" + creatioDate +
+                ", creationDate=" + creationDate +
                 ", storagePlace=" + storagePlace +
                 ", reserved=" + reserved +
                 '}';
@@ -64,12 +67,12 @@ public class Article {
         this.description = description;
     }
 
-    public Calendar getCreatioDate() {
-        return creatioDate;
+    public Calendar getCreationDate() {
+        return creationDate;
     }
 
-    public void setCreatioDate(Calendar creatioDate) {
-        this.creatioDate = creatioDate;
+    public void setCreationDate(Calendar creationDate) {
+        this.creationDate = creationDate;
     }
 
     public int getStoragePlace() {
