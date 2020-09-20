@@ -138,6 +138,10 @@
       <artifactId>tomcat-servlet-api</artifactId>
       <version>10.0.0-M7</version>
     </dependency>
+      <dependency>
+          <groupId>org.mockito</groupId>
+          <artifactId>mockito-core</artifactId>
+      </dependency>
 
   </dependencies>
 

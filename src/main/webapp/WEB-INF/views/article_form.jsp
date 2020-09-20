@@ -9,6 +9,23 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 <head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <script>
+        $(function () {
+            $("#creationDate").datepicker({
+                dateFormat: 'dd-MM-yy',
+                changeMonth:true,
+                changeYear:true
+            }).datepicker('setDate', '0');
+        })
+    </script>
+
     <title>New / Edit Article</title>
 </head>
 <body>
@@ -28,8 +45,10 @@
             </tr>
 
             <tr>
-                <td>CreationDate</td>
+                <td>Creation Date</td>
                 <td><form:input path="creationDate"/></td>
+
+<%--                Date: <input type="text" id="getDate">--%>
             </tr>
 
             <tr>

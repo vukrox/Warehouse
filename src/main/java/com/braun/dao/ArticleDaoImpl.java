@@ -8,9 +8,14 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
 import javax.sql.DataSource;
-import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 
 public class ArticleDaoImpl implements ArticleDAO {
@@ -75,14 +80,13 @@ public class ArticleDaoImpl implements ArticleDAO {
                     String name = resultSet.getString("NAME");
                     String description = resultSet.getString("DESCRIPTION");
 
-                    Date myDate = resultSet.getDate("CREATION_DATE");
-                    Calendar cal = new GregorianCalendar();
-                    cal.setTime(myDate);
+                    java.sql.Date dateToConvert = resultSet.getDate("CREATION_DATE");
+                    LocalDateTime date = convertToLocalDateTimeViaSqlTimestamp(dateToConvert);
 
                     int storagePlace = resultSet.getInt("STORAGE_PLACE");
                     boolean reserved = resultSet.getBoolean("RESERVED");
 
-                    return new Article(articleId, name, description, cal, storagePlace, reserved);
+                    return new Article(articleId, name, description, date, storagePlace, reserved);
                 } else {
                     return null;
                 }
@@ -113,14 +117,13 @@ public class ArticleDaoImpl implements ArticleDAO {
                     String name = resultSet.getString("NAME");
                     String description = resultSet.getString("DESCRIPTION");
 
-                    Date myDate = resultSet.getDate("CREATION_DATE");
-                    Calendar cal = new GregorianCalendar();
-                    cal.setTime(myDate);
+                    java.sql.Date dateToConvert = resultSet.getDate("CREATION_DATE");
+                    LocalDateTime date = convertToLocalDateTimeViaSqlTimestamp(dateToConvert);
 
                     int storagePlace = resultSet.getInt("STORAGE_PLACE");
                     boolean reserved = resultSet.getBoolean("RESERVED");
 
-                     article = new Article(articleId, name, description, cal, storagePlace, reserved);
+                     article = new Article(articleId, name, description, date, storagePlace, reserved);
 
                 return article;
             }
@@ -128,39 +131,9 @@ public class ArticleDaoImpl implements ArticleDAO {
         return jdbcTemplate.query(sqlChooseAll,artMapper);
     }
 
-//    @Override
-//    public List<Map <String,Object>> allArticles() {
-//
-//        String sqlChooseAll = "SELECT * FROM warehouse.article";
-//
-//        List<Article> articleList = new ArrayList<>();
-//
-//        RowMapper<Article> artMapper = new RowMapper<Article>() {
-//
-//            @Override
-//            public Article mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-//
-//                while (resultSet.next()) {
-//
-//                    Integer articleId = resultSet.getInt("ID");
-//                    String name = resultSet.getString("NAME");
-//                    String description = resultSet.getString("DESCRIPTION");
-//
-//                    Date myDate = resultSet.getDate("CREATION_DATE");
-//                    Calendar cal = new GregorianCalendar();
-//                    cal.setTime(myDate);
-//
-//                    int storagePlace = resultSet.getInt("STORAGE_PLACE");
-//                    boolean reserved = resultSet.getBoolean("RESERVED");
-//
-//                    Article article = new Article(articleId, name, description, cal, storagePlace, reserved);
-//                    articleList.add(article);
-//                }
-//                return null;
-//            }
-//        };
-//
-//        return jdbcTemplate.queryForList(sqlChooseAll);
-//    }
-
+    private LocalDateTime convertToLocalDateTimeViaSqlTimestamp(Date dateToConvert) {
+        LocalDateTime date = new java.sql.Timestamp(dateToConvert.getTime()).toLocalDateTime();
+        date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+        return date;
+    }
 }

@@ -1,20 +1,21 @@
 package com.braun.units;
 
-import java.util.Calendar;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Article {
 
     private int id;
     private String name;
     private String description;
-    private Calendar creationDate;
+    private LocalDateTime creationDate;
     private int storagePlace;
     private boolean reserved;
 
     public Article() {
     }
 
-    public Article(int id, String name, String description, Calendar creatioDate, int storagePlace, boolean reserved) {
+    public Article(int id, String name, String description, LocalDateTime creatioDate, int storagePlace, boolean reserved) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -23,7 +24,7 @@ public class Article {
         this.reserved = reserved;
     }
 
-    public Article(String name, String description, Calendar creatioDate, int storagePlace, boolean reserved) {
+    public Article(String name, String description, LocalDateTime creatioDate, int storagePlace, boolean reserved) {
         this.name = name;
         this.description = description;
         this.creationDate = creatioDate;
@@ -67,11 +68,11 @@ public class Article {
         this.description = description;
     }
 
-    public Calendar getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Calendar creationDate) {
+    public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
 

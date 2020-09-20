@@ -6,9 +6,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.List;
-import java.util.Map;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,25 +36,24 @@ public class ArticleDaoTest {
     }
 
     @Test
-    @Ignore
     void testSave() {
-        Article testArticle = new Article("Computer", "MacBook", new GregorianCalendar(2020, 9, 15), 10, false);
+        LocalDateTime date = LocalDateTime.of(2000, Month.FEBRUARY, 20,06,30);
+        Article testArticle = new Article("Computer", "MacBook", date, 10, false);
         int result = dao.save(testArticle);
 
         assertTrue(result > 0);
     }
 
     @Test
-    @Ignore
     void testUpdate() {
-        Article testArticle = new Article(3, "Computer", "Dell", new GregorianCalendar(2020, 10, 15), 10, false);
+        LocalDateTime date = LocalDateTime.of(2000, Month.SEPTEMBER, 20,06,30);
+        Article testArticle = new Article(5, "Computer", "Dell", date, 10, false);
         int result = dao.update(testArticle);
 
         assertTrue(result > 0);
     }
 
     @Test
-    @Ignore
     void testGet() {
         Integer id = 2;
         Article article = dao.get(id);
@@ -65,7 +66,6 @@ public class ArticleDaoTest {
     }
 
     @Test
-    @Ignore
     void testDelete() {
         Integer id = 2;
         int result = dao.delete(id);
@@ -85,6 +85,6 @@ public class ArticleDaoTest {
             System.out.println(nextArticle);
         }
         assertTrue(!articleList.isEmpty());
-        assertEquals(2, articleList.size());
+        assertEquals(4, articleList.size());
     }
 }

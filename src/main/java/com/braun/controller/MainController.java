@@ -28,7 +28,7 @@ public class MainController {
         return model;
     }
 
-    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
     public ModelAndView newArticle(ModelAndView model) {
         Article newArticle = new Article();
         model.addObject("article", newArticle);
@@ -38,11 +38,9 @@ public class MainController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ModelAndView saveArticle(@ModelAttribute Article article) {
-        if (article == null) {
+
             articleDAO.save(article);
-        } else {
-            articleDAO.update(article);
-        }
+
         return new ModelAndView("redirect:/");
     }
 
