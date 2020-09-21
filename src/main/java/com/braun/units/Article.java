@@ -8,14 +8,14 @@ public class Article {
     private int id;
     private String name;
     private String description;
-    private LocalDateTime creationDate;
+    private LocalDate creationDate;
     private int storagePlace;
     private boolean reserved;
 
     public Article() {
     }
 
-    public Article(int id, String name, String description, LocalDateTime creatioDate, int storagePlace, boolean reserved) {
+    public Article(int id, String name, String description, LocalDate creatioDate, int storagePlace, boolean reserved) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -24,7 +24,7 @@ public class Article {
         this.reserved = reserved;
     }
 
-    public Article(String name, String description, LocalDateTime creatioDate, int storagePlace, boolean reserved) {
+    public Article(String name, String description, LocalDate creatioDate, int storagePlace, boolean reserved) {
         this.name = name;
         this.description = description;
         this.creationDate = creatioDate;
@@ -68,11 +68,11 @@ public class Article {
         this.description = description;
     }
 
-    public LocalDateTime getCreationDate() {
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(LocalDateTime creationDate) {
+    public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 

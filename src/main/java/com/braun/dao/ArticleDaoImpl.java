@@ -8,14 +8,10 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
 import javax.sql.DataSource;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.*;
 
 public class ArticleDaoImpl implements ArticleDAO {
@@ -81,7 +77,7 @@ public class ArticleDaoImpl implements ArticleDAO {
                     String description = resultSet.getString("DESCRIPTION");
 
                     java.sql.Date dateToConvert = resultSet.getDate("CREATION_DATE");
-                    LocalDateTime date = convertToLocalDateTimeViaSqlTimestamp(dateToConvert);
+                    LocalDate date = convertToLocalDateViaSqlDate(dateToConvert);
 
                     int storagePlace = resultSet.getInt("STORAGE_PLACE");
                     boolean reserved = resultSet.getBoolean("RESERVED");
@@ -118,7 +114,7 @@ public class ArticleDaoImpl implements ArticleDAO {
                     String description = resultSet.getString("DESCRIPTION");
 
                     java.sql.Date dateToConvert = resultSet.getDate("CREATION_DATE");
-                    LocalDateTime date = convertToLocalDateTimeViaSqlTimestamp(dateToConvert);
+                    LocalDate date = convertToLocalDateViaSqlDate(dateToConvert);
 
                     int storagePlace = resultSet.getInt("STORAGE_PLACE");
                     boolean reserved = resultSet.getBoolean("RESERVED");
@@ -131,9 +127,9 @@ public class ArticleDaoImpl implements ArticleDAO {
         return jdbcTemplate.query(sqlChooseAll,artMapper);
     }
 
-    private LocalDateTime convertToLocalDateTimeViaSqlTimestamp(Date dateToConvert) {
-        LocalDateTime date = new java.sql.Timestamp(dateToConvert.getTime()).toLocalDateTime();
-        date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
-        return date;
+    private LocalDate convertToLocalDateViaSqlDate(Date dateToConvert) {
+//        LocalDateTime date = new java.sql.Timestamp(dateToConvert.getTime()).toLocalDateTime();
+        return new java.sql.Date(dateToConvert.getTime()).toLocalDate();
+//        return date;
     }
 }

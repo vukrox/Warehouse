@@ -28,7 +28,7 @@ public class MainController {
         return model;
     }
 
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    @RequestMapping(value = "/new", method = RequestMethod.GET)
     public ModelAndView newArticle(ModelAndView model) {
         Article newArticle = new Article();
         model.addObject("article", newArticle);

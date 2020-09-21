@@ -37,7 +37,7 @@ public class ArticleDaoTest {
 
     @Test
     void testSave() {
-        LocalDateTime date = LocalDateTime.of(2000, Month.FEBRUARY, 20,06,30);
+        LocalDate date = LocalDate.of(2000,9,14);
         Article testArticle = new Article("Computer", "MacBook", date, 10, false);
         int result = dao.save(testArticle);
 
@@ -46,8 +46,8 @@ public class ArticleDaoTest {
 
     @Test
     void testUpdate() {
-        LocalDateTime date = LocalDateTime.of(2000, Month.SEPTEMBER, 20,06,30);
-        Article testArticle = new Article(5, "Computer", "Dell", date, 10, false);
+        LocalDate date = LocalDate.of(2000,9,14);
+        Article testArticle = new Article(3, "Computer", "Dell", date, 10, false);
         int result = dao.update(testArticle);
 
         assertTrue(result > 0);
@@ -85,6 +85,6 @@ public class ArticleDaoTest {
             System.out.println(nextArticle);
         }
         assertTrue(!articleList.isEmpty());
-        assertEquals(4, articleList.size());
+        assertEquals(3, articleList.size());
     }
 }
