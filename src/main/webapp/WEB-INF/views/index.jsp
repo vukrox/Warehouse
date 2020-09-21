@@ -19,7 +19,7 @@
 
 <div align="center">
     <h1>Article List</h1>
-    <a href="new">New Article </a></h3>
+    <a href="new">New Article </a></h2>
     <table border="1" cellpadding="5">
         <tr>
             <th>No</th>

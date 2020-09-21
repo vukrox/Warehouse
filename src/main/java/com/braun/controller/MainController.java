@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -37,11 +39,13 @@ public class MainController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ModelAndView saveArticle(@ModelAttribute Article article) {
-
-            articleDAO.save(article);
-
-        return new ModelAndView("redirect:/");
+    public ModelAndView saveArticle(@ModelAttribute("article") Article article,
+                                    HttpServletResponse response) throws IOException {
+        ModelAndView model = new ModelAndView("index");
+        System.out.println("Call method 'save' \n" + article);
+        articleDAO.save(article);
+        response.sendRedirect("redirect:/");
+        return model;
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)

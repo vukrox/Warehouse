@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page session="true"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 <head>
@@ -19,7 +20,7 @@
     <script>
         $(function () {
             $("#creationDate").datepicker({
-                dateFormat: 'dd-MM-yy',
+                dateFormat: 'yy-mm-dd',
                 changeMonth:true,
                 changeYear:true
             }).datepicker('setDate', '0');
@@ -47,8 +48,6 @@
             <tr>
                 <td>Creation Date</td>
                 <td><form:input path="creationDate"/></td>
-
-<%--                Date: <input type="text" id="getDate">--%>
             </tr>
 
             <tr>

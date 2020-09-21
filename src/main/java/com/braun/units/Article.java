@@ -1,5 +1,7 @@
 package com.braun.units;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -8,6 +10,7 @@ public class Article {
     private int id;
     private String name;
     private String description;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate creationDate;
     private int storagePlace;
     private boolean reserved;
