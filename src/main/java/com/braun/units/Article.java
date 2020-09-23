@@ -3,8 +3,10 @@ package com.braun.units;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
+/*
+ * POJO Core-Class describing the main behaviour.
+ */
 public class Article {
 
     private int id;

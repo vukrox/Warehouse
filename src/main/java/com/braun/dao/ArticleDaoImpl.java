@@ -14,6 +14,11 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
 
+
+/*
+ *DAO JDBC implementation. Couldn't connect to HSQL DB - using MySQL DB connection instead.
+ */
+
 public class ArticleDaoImpl implements ArticleDAO {
 
     private JdbcTemplate jdbcTemplate;
@@ -26,7 +31,7 @@ public class ArticleDaoImpl implements ArticleDAO {
             "storage_place INTEGER , \n" +
             "reserved BOOLEAN DEFAULT FALSE NOT NULL);";
 
-
+    //The constructor for DependencyInjection.
     public ArticleDaoImpl(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
@@ -109,22 +114,22 @@ public class ArticleDaoImpl implements ArticleDAO {
 
                 Article article = null;
 
-                    Integer articleId = resultSet.getInt("ID");
-                    String name = resultSet.getString("NAME");
-                    String description = resultSet.getString("DESCRIPTION");
+                Integer articleId = resultSet.getInt("ID");
+                String name = resultSet.getString("NAME");
+                String description = resultSet.getString("DESCRIPTION");
 
-                    java.sql.Date dateToConvert = resultSet.getDate("CREATION_DATE");
-                    LocalDate date = convertToLocalDateViaSqlDate(dateToConvert);
+                java.sql.Date dateToConvert = resultSet.getDate("CREATION_DATE");
+                LocalDate date = convertToLocalDateViaSqlDate(dateToConvert);
 
-                    int storagePlace = resultSet.getInt("STORAGE_PLACE");
-                    boolean reserved = resultSet.getBoolean("RESERVED");
+                int storagePlace = resultSet.getInt("STORAGE_PLACE");
+                boolean reserved = resultSet.getBoolean("RESERVED");
 
-                     article = new Article(articleId, name, description, date, storagePlace, reserved);
+                article = new Article(articleId, name, description, date, storagePlace, reserved);
 
                 return article;
             }
         };
-        return jdbcTemplate.query(sqlChooseAll,artMapper);
+        return jdbcTemplate.query(sqlChooseAll, artMapper);
     }
 
     private LocalDate convertToLocalDateViaSqlDate(Date dateToConvert) {

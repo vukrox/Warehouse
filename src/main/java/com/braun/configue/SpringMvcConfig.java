@@ -2,6 +2,8 @@ package com.braun.configue;
 
 import com.braun.dao.ArticleDAO;
 import com.braun.dao.ArticleDaoImpl;
+import com.braun.services.ArticleService;
+import com.braun.services.ArticleServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -13,44 +15,48 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.sql.DataSource;
 
+/*
+ *Configuration file to set up DataSource,Service, and View beans for Spring.
+ */
 @Configuration
 @EnableWebMvc
-@ComponentScan (basePackages = "com.braun")
+@ComponentScan(basePackages = "com.braun")
 public class SpringMvcConfig implements WebMvcConfigurer {
 
     private static final String DRIVER_NAME = "com.mysql.jdbc.Driver";
-    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/warehouse?useUnicode=true&serverTimezone=UTC&useSSL=false";
+    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/warehouse?useUnicode=truee&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false";
     private static final String PASSWORD = "Na4uhudonossor";
     private static final String USERNAME = "root";
 
     @Bean
-    public DataSource getDataSource(){
-
+    public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-
         dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(DRIVER_NAME);
         dataSource.setUrl(DATABASE_URL);
         dataSource.setUsername(USERNAME);
         dataSource.setPassword(PASSWORD);
-
         return dataSource;
     }
 
     @Bean
     public ViewResolver getViewResolver() {
-
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setPrefix("WEB-INF/views/");
         resolver.setSuffix(".jsp");
-
         return resolver;
     }
 
     @Bean
-    public ArticleDAO getArticleDAO(){
+    public ArticleDAO getArticleDAO() {
         ArticleDAO dao = new ArticleDaoImpl(getDataSource());
-
         return dao;
+    }
+
+    @Bean
+    public ArticleService getArticleService() {
+        ArticleService service = new ArticleServiceImpl(getArticleDAO()) {
+        };
+        return service;
     }
 }

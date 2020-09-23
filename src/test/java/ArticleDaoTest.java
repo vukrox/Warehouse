@@ -1,18 +1,17 @@
 import com.braun.dao.ArticleDAO;
 import com.braun.dao.ArticleDaoImpl;
 import com.braun.units.Article;
-import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.List;
 
-
 import static org.junit.jupiter.api.Assertions.*;
+/*
+ * Class to test the method of DB interaction.
+ */
 
 public class ArticleDaoTest {
 
