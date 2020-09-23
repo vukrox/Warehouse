@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Created-By: IntelliJ IDEA
-Built-By: slava
-Build-Jdk: 14.0.2
-Implementation-Title: Warehouse
-Implementation-Version: 1.0-SNAPSHOT
-Implementation-Vendor-Id: ru.braun.
-Main-Class: ${start-class}
-
