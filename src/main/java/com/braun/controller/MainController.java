@@ -10,9 +10,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
@@ -44,13 +48,18 @@ public class MainController {
         ModelAndView model = new ModelAndView("index");
         System.out.println("Call method 'save' \n" + article);
         articleDAO.save(article);
-        response.sendRedirect("redirect:/");
-        return model;
+//        response.sendRedirect("redirect:/");
+        return new ModelAndView("redirect:/");
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public ModelAndView editArticle(HttpServletRequest request) {
         Integer id = Integer.parseInt(request.getParameter("id"));
+        try {
+            request.setCharacterEncoding("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         Article article = articleDAO.get(id);
 
         ModelAndView model = new ModelAndView("article_form");
@@ -62,7 +71,16 @@ public class MainController {
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public ModelAndView deleteArticle(@RequestParam Integer id) {
         articleDAO.delete(id);
-
         return new ModelAndView("redirect:/");
+    }
+
+    @WebFilter("//*")
+    public class RussianLettersFilter implements Filter {
+
+        @Override
+        public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+            request.setCharacterEncoding("UTF-8");
+            chain.doFilter(request, response);
+        }
     }
 }
